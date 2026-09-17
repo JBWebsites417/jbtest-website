@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: JBWebsites417/jbtest-website
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "content"
+    label: "Website Content"
+    files:
+      - name: "homepage"
+        label: "Homepage"
+        file: "src/content/homepage.yml"
+        fields:
+          - label: "Business Name"
+            name: "business_name"
+            widget: "string"
+          - label: "Phone"
+            name: "phone"
+            widget: "string"
+          - label: "Homepage Photo"
+            name: "hero_image"
+            widget: "image"
