@@ -2,6 +2,7 @@ backend:
   name: github
   repo: JBWebsites417/jbtest-website
   branch: main
+  base_url: https://turbo.decapcms.org
 
 media_folder: "public/images"
 public_folder: "/images"
