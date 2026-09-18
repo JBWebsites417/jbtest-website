@@ -1,8 +1,7 @@
 backend:
-  name: github
-  repo: JBWebsites417/jbtest-website
+  name: turbo-github
+  turbo_site_id: 0d16319b-cd7d-4be8-af45-e3b745ca0035
   branch: main
-  base_url: https://turbo.decapcms.org
 
 media_folder: "public/images"
 public_folder: "/images"
