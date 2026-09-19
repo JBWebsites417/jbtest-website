@@ -6,21 +6,23 @@ export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [heroImage, setHeroImage] = useState('');
 
-  useEffect(() => {
-    fetch(
-      'https://raw.githubusercontent.com/JBWebsites417/jbtest-website/main/src/content/homepage.yml'
-    )
-      .then((res) => res.text())
-      .then((text) => {
-        const match = text.match(/hero_image:\s*["']?([^"'\n]*)/);
-        const imagePath = match?.[1]?.trim();
+ useEffect(() => {
+  fetch(
+    'https://raw.githubusercontent.com/JBWebsites417/jbtest-website/main/src/content/homepage.yml'
+  )
+    .then((res) => res.text())
+    .then((text) => {
+      const match = text.match(/hero_image:\s*["']?([^"'\n]*)/);
+      const imagePath = match?.[1]?.trim();
 
-        if (imagePath) {
-          setHeroImage(imagePath);
-        }
-      })
-      .catch(console.error);
-  }, []);
+      if (imagePath) {
+        setHeroImage(
+  `https://raw.githubusercontent.com/JBWebsites417/jbtest-website/main/public${imagePath}`
+);
+      }
+    })
+    .catch(console.error);
+}, []);
 
   const images = heroImage
     ? [...heroImages, heroImage]
