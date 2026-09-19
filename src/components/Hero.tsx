@@ -4,17 +4,39 @@ import { business, heroImages } from '../data';
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
+  const [heroImage, setHeroImage] = useState('');
+
+  useEffect(() => {
+    fetch(
+      'https://raw.githubusercontent.com/JBWebsites417/jbtest-website/main/src/content/homepage.yml'
+    )
+      .then((res) => res.text())
+      .then((text) => {
+        const match = text.match(/hero_image:\s*["']?([^"'\n]*)/);
+        const imagePath = match?.[1]?.trim();
+
+        if (imagePath) {
+          setHeroImage(imagePath);
+        }
+      })
+      .catch(console.error);
+  }, []);
+
+  const images = heroImage
+    ? [...heroImages, heroImage]
+    : heroImages;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % heroImages.length);
+      setCurrent((prev) => (prev + 1) % images.length);
     }, 5000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <section id="top" className="relative h-screen min-h-[700px] overflow-hidden">
-      {heroImages.map((img, i) => (
+      {images.map((img, i) => (
         <div
           key={i}
           className="absolute inset-0 transition-opacity duration-1000"
@@ -81,7 +103,7 @@ export default function Hero() {
       </div>
 
       <div className="absolute bottom-8 right-8 hidden md:flex gap-2">
-        {heroImages.map((_, i) => (
+        {images.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
